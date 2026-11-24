@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Что вы платите и за что</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfaf7;--card:#fff;--ink:#16181d;--mute:#5d6470;--line:#e7e4dc;--acc:#e8541e;--acc-soft:#fdeee6}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Onest,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%;overflow-x:hidden}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 56px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+h1{font-size:clamp(34px,9vw,54px);line-height:1.04;font-weight:800;letter-spacing:-.025em;margin:12px 0 14px;text-wrap:balance}
+.lead{font-size:18px;color:var(--mute);margin:0 0 28px;max-width:34em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 20px;margin-top:14px}
+.num{display:inline-block;font-size:13px;font-weight:700;color:var(--acc);background:var(--acc-soft);border-radius:99px;padding:3px 11px}
+h2{font-size:clamp(26px,6.6vw,34px);line-height:1.1;font-weight:800;letter-spacing:-.02em;margin:12px 0 8px;text-wrap:balance}
+h3{font-size:19px;margin:0;font-weight:700}
+p{margin:0 0 10px}
+.sub{color:var(--mute)}
+.big{font-size:clamp(34px,10vw,46px);font-weight:800;letter-spacing:-.025em;line-height:1;color:var(--ink)}
+.big small{font-size:.45em;font-weight:600;color:var(--mute);letter-spacing:0}
+ul{list-style:none;margin:12px 0 0;padding:0}
+li{position:relative;padding:6px 0 6px 26px}
+li::before{content:"";position:absolute;left:2px;top:15px;width:10px;height:10px;border-radius:50%;background:var(--acc)}
+.rows{margin-top:12px;border-top:1px solid var(--line)}
+.row{padding:14px 0;border-bottom:1px solid var(--line)}
+.row .big{font-size:clamp(28px,8vw,36px)}
+.row p{margin:6px 0 0;color:var(--mute)}
+.row .t{font-size:13px;font-weight:600;color:var(--acc);white-space:nowrap}
+.pk{border:1px solid var(--line);border-radius:16px;padding:18px 16px;margin-top:12px}
+.pk.rec{border:2px solid var(--acc);background:var(--acc-soft)}
+.pk-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px}
+.pk-h .big{font-size:30px}
+.tag{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--acc);border-radius:99px;padding:2px 10px;vertical-align:middle;margin-left:6px}
+.pk ul{margin-top:8px}.pk li{font-size:15px;padding:4px 0 4px 24px}.pk li::before{top:12px;width:8px;height:8px}
+.pk .plus{font-size:14px;font-weight:600;color:var(--acc);margin:8px 0 0}
+.pick{font-weight:700;font-size:17px;margin-top:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:15px;flex:1 1 150px}
+.chip b{display:block;font-size:17px}
+.chip span{color:var(--mute);font-size:14px}
+.warn{background:var(--ink);color:#fff;border-radius:20px;padding:24px 20px;margin-top:14px}
+.warn h2{color:#fff}
+.warn p{color:#d9dbe0}
+.warn .t{color:#ffb596}
+.tc{margin-top:14px}
+.tc li{padding:5px 0 5px 0}.tc li::before{display:none}
+.tc b{color:var(--acc);font-variant-numeric:tabular-nums;display:inline-block;min-width:104px}
+.chat{margin-top:14px;background:var(--acc);color:#fff;border-radius:20px;padding:22px 20px;font-size:19px;font-weight:700;line-height:1.35}
+@media(min-width:700px){.wrap{padding:64px 24px 80px}.card,.warn{padding:32px 32px}.chat{padding:28px 32px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="eyebrow">Проект «Упаковка + заявки»</div>
+  <h1>Что вы платите и за что</h1>
+  <p class="lead">Коротко и по пунктам, чтобы с самого начала у нас с вами было одно и то же понимание. Четыре блока: что входит в упаковку, за что платите по результату, какой шаг обязателен по договору и что можно подключить по желанию.</p>
+
+  <section class="card">
+    <span class="num">1 · Упаковка</span>
+    <h2>20 000 ₽ — и всё это ваше</h2>
+    <p class="sub">В рамках упаковки мы делаем:</p>
+    <ul>
+      <li><b>Сайт</b> под вашу нишу и услуги</li>
+      <li><b>Чат-бот с мини-игрой</b>, который собирает заявки</li>
+      <li><b>Гайд-трипвайер</b>, с которого начинается знакомство с клиентом</li>
+    </ul>
+    <p style="margin-top:12px">Всё это принадлежит вам. <span class="t" style="font-size:13px;font-weight:600;color:var(--acc)">видео 11:20</span></p>
+  </section>
+
+  <section class="card">
+    <span class="num">2 · Платите за результат</span>
+    <h2>Дальше — только за результат</h2>
+    <p class="sub">Три вещи, которые оплачиваются отдельно от упаковки.</p>
+    <div class="rows">
+      <div class="row">
+        <div class="big">150 ₽ <small>за заявку</small></div>
+        <p>За целевую подтверждённую заявку, которая передана вам. Платите после её получения. <span class="t">11:20</span></p>
+      </div>
+      <div class="row">
+        <div class="big">10% <small>с чистой прибыли</small></div>
+        <p>Только с чистой прибыли, которую вы реально получили с использованием наших материалов. <span class="t">09:30</span></p>
+      </div>
+      <div class="row">
+        <div class="big">Рекламный бюджет</div>
+        <p>Ориентир для вашей ниши есть в таблице из видео <span class="t">14:05–14:36</span>. Он прописан в договоре: Приложение № 1, п. 2.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <span class="num">3 · SEO по договору</span>
+    <h2>Реклама вашего сайта в поиске</h2>
+    <p>SEO — это реклама сайта в поиске. Её покупка предусмотрена договором (Приложение № 1, п. 2), поэтому это обязательный шаг.</p>
+    <p class="pick">Выберите один из трёх пакетов, а не «покупать или нет».</p>
+    <p class="sub">Оплата один раз, без абонентской платы.</p>
+
+    <div class="pk">
+      <div class="pk-h"><h3>Старт</h3><div class="big">5 000 ₽</div></div>
+      <ul>
+        <li>Сайт на вашем домене</li>
+        <li>SEO-настройка</li>
+        <li>Юридический минимум</li>
+        <li>Карточки на картах</li>
+        <li>QR-плакат отзывов и 10 ответов на отзывы</li>
+        <li>Страница проекта</li>
+      </ul>
+    </div>
+
+    <div class="pk rec">
+      <div class="pk-h"><h3>Стандарт<span class="tag">рекомендуем</span></h3><div class="big">7 500 ₽</div></div>
+      <p class="plus">Всё из «Старта» и ещё:</p>
+      <ul>
+        <li>Блог: от 1 статьи в неделю, со 2-й недели</li>
+        <li>Углублённые Распаковка и Рекомендации</li>
+        <li>Скрипты продаж</li>
+        <li>Презентация</li>
+        <li>Скрипт холодных сообщений</li>
+      </ul>
+    </div>
+
+    <div class="pk">
+      <div class="pk-h"><h3>Максимум</h3><div class="big">8 000 ₽</div></div>
+      <p class="plus">Всё из «Стандарта» и ещё:</p>
+      <ul>
+        <li>Карта каналов для посевов в Telegram</li>
+        <li>Усиленный блог: 2 статьи в неделю в первый месяц</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="card">
+    <span class="num">4 · По желанию</span>
+    <h2>Каналы-ускорители</h2>
+    <p class="sub">Необязательно. Подключаете, если хотите быстрее. Число заявок не гарантируется ни в одном из каналов.</p>
+    <div class="chips">
+      <div class="chip"><b>ВК-реклама</b>15 000 ₽ <span>+ бюджет</span></div>
+      <div class="chip"><b>Директ</b>15 000 ₽ <span>+ бюджет</span></div>
+      <div class="chip"><b>Авито</b>15 000 ₽ <span>+ бюджет</span></div>
+      <div class="chip"><b>ТГ-посевы</b>25% <span>от бюджета</span></div>
+      <div class="chip"><b>ИИ-обзвон</b>от 3 500 ₽</div>
+    </div>
+  </section>
+
+  <section class="warn">
+    <h2>Что мы не можем гарантировать</h2>
+    <p>Число заявок и позиции в поиске. Результат зависит и от того, как выполняются рекомендации и приходит обратная связь. <span class="t">12:08–13:02</span></p>
+  </section>
+
+  <section class="card">
+    <span class="num">Как идут заявки</span>
+    <h2>Запускает поток ваша работа по плану</h2>
+    <p>В личном кабинете вы выполняете Распаковку и Рекомендации. Там уже лежат готовые материалы: вы публикуете их и отчитываетесь. Именно это запускает поток заявок.</p>
+  </section>
+
+  <section class="card">
+    <span class="num">Таймкоды видео</span>
+    <h2>Где это сказано</h2>
+    <ul class="tc">
+      <li><b>09:30</b> 10% с чистой прибыли</li>
+      <li><b>11:20</b> упаковка 20 000 ₽, 150 ₽ за заявку</li>
+      <li><b>12:08–13:02</b> что нельзя гарантировать</li>
+      <li><b>14:05–14:36</b> таблица рекламного бюджета</li>
+    </ul>
+  </section>
+
+  <div class="chat">Все правки и вопросы пишите письменно в рабочий чат.</div>
+</main>
+</body>
+</html>
