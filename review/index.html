@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
+<title>Мини-отзыв за 30 секунд</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fafaf7; --card:#fff; --ink:#1b1d1f; --mute:#6a6f73; --line:#e6e6e0;
+  --accent:#1f7a5a; --accent-soft:#e7f3ee; --accent-ink:#fff;
+  --r:16px;
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Onest',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.45;overflow-x:hidden;
+  padding:max(20px,env(safe-area-inset-top)) 16px max(40px,env(safe-area-inset-bottom))}
+main{max-width:560px;margin:0 auto}
+h1{font-size:clamp(26px,7vw,34px);line-height:1.15;font-weight:700;letter-spacing:-.02em;margin:8px 0 8px;overflow-wrap:anywhere}
+.lead{color:var(--mute);margin-bottom:28px}
+.step{margin-bottom:28px}
+.step[hidden]{display:none}
+h2{font-size:15px;font-weight:600;color:var(--mute);margin-bottom:12px;display:flex;gap:10px;align-items:center}
+h2 b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:13px;flex:none}
+button,a.btn{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible,a.btn:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.stars{display:flex;gap:6px;justify-content:space-between}
+.star{flex:1;min-width:0;height:60px;border:1.5px solid var(--line);background:var(--card);border-radius:var(--r);font-size:30px;line-height:1;color:#c9c9c2;transition:.15s}
+.star.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{min-height:52px;padding:12px 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-weight:500;text-align:left;max-width:100%;transition:.15s}
+.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.opts{display:grid;gap:10px}
+.opt{min-height:56px;padding:14px 18px;border-radius:var(--r);border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-weight:500;text-align:left;transition:.15s}
+.opt[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.two .opt{text-align:center}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:18px}
+.card h3{font-size:19px;font-weight:700;margin-bottom:6px}
+textarea{width:100%;min-height:190px;resize:vertical;border:1.5px solid var(--line);border-radius:12px;padding:14px;font:inherit;font-size:17px;line-height:1.5;color:var(--ink);background:#fff;margin:12px 0}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:12px 18px;border-radius:var(--r);border:1.5px solid var(--accent);background:var(--accent);color:var(--accent-ink);font-weight:600;text-decoration:none;width:100%;margin-top:10px;text-align:center}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.disabled{border-color:var(--line);color:var(--mute);background:#f3f3ee;border-style:dashed;pointer-events:none;font-weight:500}
+.hint{color:var(--mute);font-size:15px;margin-top:12px}
+.hint q{color:var(--ink);font-weight:600;quotes:"«" "»"}
+.small{font-size:14px;color:var(--mute)}
+.sep{height:1px;background:var(--line);margin:26px 0}
+.toast{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;opacity:0;transition:.25s;pointer-events:none;max-width:calc(100vw - 32px);font-size:15px}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:700px){body{padding-top:48px}.star{height:68px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <h1 id="hello">Спасибо!</h1>
+  <p class="lead">Несколько касаний, и готов короткий отзыв. Ничего писать не нужно.</p>
+
+  <section class="step" id="s1">
+    <h2><b>1</b> Как вам результат?</h2>
+    <div class="stars" id="stars" role="group" aria-label="Оценка от 1 до 5"></div>
+  </section>
+
+  <section class="card" id="bad" hidden>
+    <h3>Расскажите, что не так</h3>
+    <p>Нам важно это исправить. Напишите в рабочий чат своими словами, мы разберёмся.</p>
+    <a class="btn" id="badBtn" href="#" target="_blank" rel="noopener">Написать в рабочий чат</a>
+  </section>
+
+  <div id="flow" hidden>
+    <section class="step" id="s2">
+      <h2><b>2</b> Что понравилось? Можно несколько</h2>
+      <div class="chips" id="chips"></div>
+    </section>
+
+    <section class="step" id="s3">
+      <h2><b>3</b> Что изменилось?</h2>
+      <div class="opts" id="changes"></div>
+    </section>
+
+    <section class="step" id="s4">
+      <h2><b>4</b> Можно использовать как отзыв на сайте проекта?</h2>
+      <div class="two" id="consent"></div>
+    </section>
+  </div>
+
+  <section id="result" hidden>
+    <div class="sep"></div>
+    <div class="card">
+      <h3>Готовый отзыв</h3>
+      <p class="small">Можно поправить прямо в поле.</p>
+      <textarea id="text" aria-label="Текст отзыва"></textarea>
+      <button class="btn ghost" id="again" type="button" style="margin-top:0">Другая формулировка</button>
+      <button class="btn" id="copy" type="button">Скопировать</button>
+      <a class="btn ghost" id="share" href="#" target="_blank" rel="noopener">Отправить в чат</a>
+      <p class="hint">Вставьте этот текст в наш рабочий чат с кодовой фразой <q>отзыв</q>.</p>
+    </div>
+
+    <div class="sep"></div>
+    <h2 style="margin-bottom:10px">Где ещё оставить</h2>
+    <div id="where"></div>
+    <p class="small" style="margin-top:14px">Страница ничего не отправляет на сервер и не сохраняет ваши ответы.</p>
+  </section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  function clean(s,n){ return (s||'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,n); }
+  function safeUrl(s){ try{ var u=new URL(s); return (u.protocol==='https:'||u.protocol==='http:')?u.href:''; }catch(e){ return ''; } }
+  var name = clean(q.get('n'),40), code = clean(q.get('r'),30);
+  var yUrl = safeUrl(q.get('y')||''), vUrl = safeUrl(q.get('v')||'');
+  var pageUrl = location.origin + location.pathname;
+  if(location.protocol==='file:') pageUrl='https://murzzsite.github.io/client-pages/review/';
+
+  document.getElementById('hello').textContent = name ? 'Спасибо, '+name+'!' : 'Спасибо, что с нами!';
+
+  var CHIPS = [
+    {id:'fast', label:'Быстро сделали', cl:'сайт сделали быстро'},
+    {id:'explained', label:'Всё понятно объяснили', cl:'всё понятно объяснили'},
+    {id:'beauty', label:'Красивый сайт', cl:'сайт получился красивым'},
+    {id:'guide', label:'Гайд и чат-бот', cl:'сделали гайд и чат-бот'},
+    {id:'seo', label:'Настройка для поиска (SEO)', cl:'настроили сайт для поиска (SEO)'},
+    {id:'ontime', label:'Отвечали вовремя', cl:'на сообщения отвечали вовремя'}
+  ];
+  var CHANGES = [
+    {id:'leads', label:'Первые заявки уже пошли'},
+    {id:'wait', label:'Ждём первых заявок, но всё готово'},
+    {id:'na', label:'Пока не оценить'}
+  ];
+
+  var st = {rating:0, chips:[], change:'', consent:'', seed:0, dirty:false};
+  var $ = function(id){return document.getElementById(id);};
+
+  // stars
+  var starsEl = $('stars');
+  for(var i=1;i<=5;i++){
+    (function(n){
+      var b=document.createElement('button'); b.type='button'; b.className='star'; b.textContent='★';
+      b.setAttribute('aria-label', n+' из 5'); b.setAttribute('aria-pressed','false');
+      b.onclick=function(){ st.rating=n; st.dirty=false; render(); };
+      starsEl.appendChild(b);
+    })(i);
+  }
+  // chips
+  CHIPS.forEach(function(c){
+    var b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=c.label; b.setAttribute('aria-pressed','false');
+    b.onclick=function(){
+      var k=st.chips.indexOf(c.id); if(k<0) st.chips.push(c.id); else st.chips.splice(k,1);
+      st.dirty=false; render();
+    };
+    c.el=b; $('chips').appendChild(b);
+  });
+  CHANGES.forEach(function(c){
+    var b=document.createElement('button'); b.type='button'; b.className='opt'; b.textContent=c.label; b.setAttribute('aria-pressed','false');
+    b.onclick=function(){ st.change=c.id; st.dirty=false; render(); };
+    c.el=b; $('changes').appendChild(b);
+  });
+  var CONS=[{id:'yes',label:'Да'},{id:'no',label:'Нет'}];
+  CONS.forEach(function(c){
+    var b=document.createElement('button'); b.type='button'; b.className='opt'; b.textContent=c.label; b.setAttribute('aria-pressed','false');
+    b.onclick=function(){ st.consent=c.id; render(); };
+    c.el=b; $('consent').appendChild(b);
+  });
+
+  function pick(arr){ return arr[st.seed % arr.length]; }
+  function pick2(arr,shift){ return arr[(st.seed+shift) % arr.length]; }
+
+  function joinList(a){
+    if(a.length<2) return a.join('');
+    return a.slice(0,-1).join(', ')+' и '+a[a.length-1];
+  }
+
+  function build(){
+    var r=st.rating, parts=[];
+    var open5=['Работой довольны.','Сотрудничеством остались довольны.','Работа получилась именно такой, как нужно.'];
+    var open4=['В целом работой довольны.','Сотрудничество оставило хорошее впечатление.','Работа получилась достойной.'];
+    parts.push(pick(r===5?open5:open4));
+
+    var cl = CHIPS.filter(function(c){return st.chips.indexOf(c.id)>=0;}).map(function(c){return c.cl;});
+    if(cl.length){
+      var lead=[ 'Понравилось, что ', 'Отдельно отметим, что ', 'Хочется отметить, что '];
+      var l = pick2(lead,1);
+      if(cl.length>3){
+        parts.push(l+joinList(cl.slice(0,3))+'.');
+        parts.push('Ещё '+(cl.length-3===1?'понравилось, что ':'понравилось, что ')+joinList(cl.slice(3))+'.');
+      } else parts.push(l+joinList(cl)+'.');
+    }
+
+    var ch = st.change;
+    if(ch==='leads') parts.push(pick2(['Первые заявки уже пошли.','Уже пошли первые заявки.'],0));
+    else if(ch==='wait') parts.push(pick2(['Всё готово к работе, ждём первых заявок.','Сайт готов, теперь ждём первых заявок.'],0));
+    else if(parts.length<3) parts.push(pick2(['Результат по заявкам оценим чуть позже.','Что даст сайт по заявкам, посмотрим со временем.'],0));
+
+    var ends = r===5
+      ? ['Можем рекомендовать.','Спасибо команде за работу.','Было удобно работать, спасибо.']
+      : ['Спасибо за работу.','Было удобно работать.','Спасибо команде.'];
+    if(parts.length<4) parts.push(pick2(ends,2));
+    return parts.slice(0,4).join(' ');
+  }
+
+  function payload(){
+    var t=$('text').value.trim();
+    var sig = [];
+    if(name) sig.push(name);
+    if(code) sig.push('проект '+code);
+    var out = 'отзыв\n'+t;
+    if(sig.length) out += '\n— '+sig.join(', ');
+    if(st.consent==='no') out += '\n(только для нас, на сайте не публиковать)';
+    else if(st.consent==='yes') out += '\n(можно публиковать на сайте проекта)';
+    return out;
+  }
+  function chatLink(text){
+    return 'https://t.me/share/url?url='+encodeURIComponent(pageUrl)+'&text='+encodeURIComponent(text);
+  }
+
+  function toast(m){
+    var t=$('toast'); t.textContent=m; t.classList.add('show');
+    clearTimeout(toast.t); toast.t=setTimeout(function(){t.classList.remove('show');},2200);
+  }
+
+  function setPressed(el,on){ el.setAttribute('aria-pressed', on?'true':'false'); }
+
+  function renderWhere(){
+    var w=$('where'); w.textContent='';
+    function slot(url,label,empty){
+      var a=document.createElement('a'); a.className='btn'+(url?' ghost':' disabled');
+      if(url){ a.href=url; a.target='_blank'; a.rel='noopener'; a.textContent=label; }
+      else { a.textContent=empty; a.setAttribute('aria-disabled','true'); }
+      w.appendChild(a);
+    }
+    slot(yUrl,'Оставить на Яндекс Картах','Яндекс Карты: ссылка появится здесь');
+    slot(vUrl,'Оставить в ВК','ВК: ссылка появится здесь');
+    var h=document.createElement('p'); h.className='hint';
+    h.textContent = (yUrl||vUrl) ? 'Тот же текст можно вставить и там: нажмите «Скопировать» выше.' : 'Если у нас появятся страницы для отзывов, ссылки будут здесь.';
+    w.appendChild(h);
+  }
+
+  function render(){
+    var bars=starsEl.children;
+    for(var i=0;i<5;i++){ bars[i].classList.toggle('on', i<st.rating); setPressed(bars[i], st.rating===i+1); }
+    var low = st.rating>0 && st.rating<=3;
+    $('bad').hidden = !low;
+    $('flow').hidden = !(st.rating>=4);
+    if(low){
+      var t='Хочу рассказать, что не так'+(code?' (проект '+code+')':'')+(name?', '+name:'')+'.';
+      $('badBtn').href = chatLink(t);
+    }
+    CHIPS.forEach(function(c){ setPressed(c.el, st.chips.indexOf(c.id)>=0); });
+    CHANGES.forEach(function(c){ setPressed(c.el, st.change===c.id); });
+    CONS.forEach(function(c){ setPressed(c.el, st.consent===c.id); });
+
+    var ready = st.rating>=4 && st.change && st.consent;
+    $('result').hidden = !ready;
+    if(ready){
+      if(!st.dirty) $('text').value = build();
+      $('share').href = chatLink(payload());
+      renderWhere();
+    }
+  }
+
+  $('text').addEventListener('input', function(){ st.dirty=true; $('share').href=chatLink(payload()); });
+  $('again').onclick=function(){ st.seed++; st.dirty=false; render(); toast('Готово, другая формулировка'); };
+  $('share').addEventListener('click', function(){ $('share').href=chatLink(payload()); });
+
+  $('copy').onclick=function(){
+    var txt=payload();
+    function fallback(){
+      var ta=$('text'); var old=ta.value; ta.value=txt; ta.focus(); ta.select();
+      var ok=false; try{ ok=document.execCommand('copy'); }catch(e){}
+      ta.value=old; ta.blur(); toast(ok?'Скопировано':'Не вышло, выделите текст и скопируйте вручную');
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){toast('Скопировано');}, fallback);
+    } else fallback();
+  };
+
+  render();
+})();
+</script>
+</body>
+</html>
