@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fbfaf7;--card:#fff;--ink:#16181d;--mute:#5d6470;--line:#e7e4dc;--acc:#e8541e;--acc-soft:#fdeee6}
+:root{--bg:#f6f4ef;--card:#fff;--ink:#1d2330;--mute:#6b7385;--line:#e6e2d8;--acc:#2f6bff;--accd:#1f4fd1;--acc-soft:#eaf1ff}
 *{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font-family:Onest,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%;overflow-x:hidden}
@@ -45,14 +45,29 @@ li::before{content:"";position:absolute;left:2px;top:15px;width:10px;height:10px
 .chip{border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:15px;flex:1 1 150px}
 .chip b{display:block;font-size:17px}
 .chip span{color:var(--mute);font-size:14px}
-.warn{background:var(--ink);color:#fff;border-radius:20px;padding:24px 20px;margin-top:14px}
+.warn{background:#16254d;color:#fff;border-radius:20px;padding:24px 20px;margin-top:14px}
 .warn h2{color:#fff}
 .warn p{color:#d9dbe0}
-.warn .t{color:#ffb596}
+.warn .t{color:#a9c4ff}
 .tc{margin-top:14px}
 .tc li{padding:5px 0 5px 0}.tc li::before{display:none}
 .tc b{color:var(--acc);font-variant-numeric:tabular-nums;display:inline-block;min-width:104px}
 .chat{margin-top:14px;background:var(--acc);color:#fff;border-radius:20px;padding:22px 20px;font-size:19px;font-weight:700;line-height:1.35}
+
+.t[data-t]{cursor:pointer}
+.vid{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 16px}
+.vid[hidden]{display:none}
+.player{position:relative;border-radius:14px;overflow:hidden;background:linear-gradient(135deg,#1f4fd1,#2f6bff 60%,#6c9bff);aspect-ratio:16/9}
+.player video{display:block;width:100%;height:100%;object-fit:contain;background:#0e1a3d}
+.chs{margin:14px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.chs li{padding:0;border-bottom:1px solid var(--line)}.chs li::before{display:none}
+.ch{all:unset;box-sizing:border-box;display:flex;gap:12px;align-items:baseline;width:100%;min-height:44px;padding:10px 4px;cursor:pointer;font:500 15px/1.35 Onest,system-ui,sans-serif;color:var(--ink)}
+.ch:focus-visible{outline:2px solid var(--acc);outline-offset:-2px;border-radius:8px}
+.ch b{flex:none;min-width:48px;font-variant-numeric:tabular-nums;color:var(--accd);font-weight:700}
+.ch.on{background:var(--acc-soft);border-radius:10px}
+.ch.on span{font-weight:700}
+.pic{display:block;width:100%;height:auto;border-radius:14px;margin-top:12px;border:1px solid var(--line)}
+.vnote{font-size:14px;color:var(--mute);margin:10px 0 0}
 @media(min-width:700px){.wrap{padding:64px 24px 80px}.card,.warn{padding:32px 32px}.chat{padding:28px 32px}}
 </style>
 </head>
@@ -62,9 +77,17 @@ li::before{content:"";position:absolute;left:2px;top:15px;width:10px;height:10px
   <h1>Что вы платите и за что</h1>
   <p class="lead">Коротко и по пунктам, чтобы с самого начала у нас с вами было одно и то же понимание. Четыре блока: что входит в упаковку, за что платите по результату, какой шаг обязателен по договору и что можно подключить по желанию.</p>
 
+  <section class="vid" id="vid" hidden>
+    <span class="num">Видео</span>
+    <h2>Разбор условий по минутам</h2>
+    <p class="sub">Нажмите на строку, видео перемотается на нужное место.</p>
+    <div class="player"><video id="v" controls playsinline preload="metadata"><source src="video.mp4" type="video/mp4"></video></div>
+    <ul class="chs" id="chs"></ul>
+  </section>
+
   <section class="card">
     <span class="num">1 · Упаковка</span>
-    <h2>20 000 ₽ — и всё это ваше</h2>
+    <h2>20 000 ₽ и всё это ваше</h2>
     <p class="sub">В рамках упаковки мы делаем:</p>
     <ul>
       <li><b>Сайт</b> под вашу нишу и услуги</li>
@@ -76,7 +99,7 @@ li::before{content:"";position:absolute;left:2px;top:15px;width:10px;height:10px
 
   <section class="card">
     <span class="num">2 · Платите за результат</span>
-    <h2>Дальше — только за результат</h2>
+    <h2>Дальше только за результат</h2>
     <p class="sub">Три вещи, которые оплачиваются отдельно от упаковки.</p>
     <div class="rows">
       <div class="row">
@@ -97,7 +120,7 @@ li::before{content:"";position:absolute;left:2px;top:15px;width:10px;height:10px
   <section class="card">
     <span class="num">3 · SEO по договору</span>
     <h2>Реклама вашего сайта в поиске</h2>
-    <p>SEO — это реклама сайта в поиске. Её покупка предусмотрена договором (Приложение № 1, п. 2), поэтому это обязательный шаг.</p>
+    <p>SEO это реклама сайта в поиске. Её покупка предусмотрена договором (Приложение № 1, п. 2), поэтому это обязательный шаг.</p>
     <p class="pick">Выберите один из трёх пакетов, а не «покупать или нет».</p>
     <p class="sub">Оплата один раз, без абонентской платы.</p>
 
@@ -159,7 +182,7 @@ li::before{content:"";position:absolute;left:2px;top:15px;width:10px;height:10px
     <p>В личном кабинете вы выполняете Распаковку и Рекомендации. Там уже лежат готовые материалы: вы публикуете их и отчитываетесь. Именно это запускает поток заявок.</p>
   </section>
 
-  <section class="card">
+  <section class="card" id="tcstatic">
     <span class="num">Таймкоды видео</span>
     <h2>Где это сказано</h2>
     <ul class="tc">
@@ -170,7 +193,28 @@ li::before{content:"";position:absolute;left:2px;top:15px;width:10px;height:10px
     </ul>
   </section>
 
+  <section class="card">
+    <span class="num">Памятка</span>
+    <h2>Всё то же одной картинкой</h2>
+    <img class="pic" src="conditions.png" alt="Что вы платите и за что: упаковка, оплата за результат, SEO по договору, ускорители" loading="lazy">
+  </section>
+
   <div class="chat">Все правки и вопросы пишите письменно в рабочий чат.</div>
 </main>
+<script>
+(function(){
+var CH=[[0,"Знакомство и зачем это видео"],[26,"Что такое ЦПА-сеть"],[89,"Как это работает: страница, чат-бот, заявка"],[159,"Средняя конверсия заявок по нишам"],[240,"Как устроен лид-магнит"],[319,"Что нужно, чтобы пошли первые заявки"],[379,"Откуда трафик: обучение исполнителей биржи"],[467,"Как создаётся заказ на бирже"],[570,"10% с чистой прибыли"],[581,"Что делает команда по договору"],[631,"Что входит в упаковку"],[680,"Цена упаковки 20 000 ₽ и заявки"],[728,"Гарантия 90 дней и её условия"],[789,"Как оплатить и документы"],[802,"Сколько закладывать на бюджет"],[845,"Бюджет по нишам: 40 000 и 25 000 ₽"],[888,"Итог"]];
+var vid=document.getElementById("vid"),v=document.getElementById("v"),box=document.getElementById("chs"),st=document.getElementById("tcstatic"),ready=false,btns=[];
+function f(s){var m=Math.floor(s/60),x=s%60;return (m<10?"0":"")+m+":"+(x<10?"0":"")+x}
+CH.forEach(function(c){var li=document.createElement("li"),b=document.createElement("button");b.type="button";b.className="ch";b.innerHTML="<b>"+f(c[0])+"</b><span>"+c[1]+"</span>";b.onclick=function(){go(c[0])};li.appendChild(b);box.appendChild(li);btns.push(b)});
+function go(s){if(!ready)return;try{v.currentTime=s;var p=v.play();if(p&&p.catch)p.catch(function(){})}catch(e){}vid.scrollIntoView({behavior:"smooth",block:"start"})}
+function mm(s){var a=s.split(":");return (+a[0])*60+(+a[1])}
+Array.prototype.forEach.call(document.querySelectorAll(".t"),function(e){var m=(e.textContent||"").match(/(\d\d:\d\d)/);if(m){e.setAttribute("data-t",mm(m[1]));e.onclick=function(){go(mm(m[1]))}}});
+Array.prototype.forEach.call(document.querySelectorAll(".tc b"),function(e){var s=mm(e.textContent.slice(0,5));e.style.cursor="pointer";e.onclick=function(){go(s)}});
+v.addEventListener("loadedmetadata",function(){ready=true;vid.hidden=false;if(st)st.hidden=true;var h=location.hash.match(/t=(\d+)/);if(h){v.currentTime=+h[1]}});
+v.addEventListener("timeupdate",function(){var t=v.currentTime,k=0;CH.forEach(function(c,i){if(t>=c[0])k=i});btns.forEach(function(b,i){b.classList.toggle("on",i===k&&t>0)})});
+v.load();
+})();
+</script>
 </body>
 </html>
