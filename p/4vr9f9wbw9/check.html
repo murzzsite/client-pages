@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Состояние сайта HR-Di на 26.11</title>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--ink:#1d2330;--mut:#6b7385;--line:#e6e2d8;--acc:#2f6bff;--accd:#1f4fd1}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 Onest,system-ui,sans-serif;overflow-x:hidden}
+.wrap{max-width:680px;margin:0 auto;padding:28px 16px 48px}
+.kick{font-size:13px;font-weight:600;color:var(--mut);letter-spacing:.04em;text-transform:uppercase}
+h1{font-size:clamp(26px,7vw,38px);line-height:1.12;margin:8px 0 14px;font-weight:800;letter-spacing:-.02em;overflow-wrap:anywhere}
+.lead{color:#39425a;margin:0 0 8px}
+h2{font-size:20px;margin:30px 0 10px;font-weight:700}
+.blk p{margin:0 0 10px;color:#39425a}.note{color:var(--mut);font-size:14.5px}
+.it{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px}
+.tx{overflow-wrap:anywhere}
+.cp,.pr{margin-top:10px;min-height:44px;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--ink);font:600 15px Onest,system-ui,sans-serif;cursor:pointer}
+.cp:hover,.pr:hover{background:#f4f7ff}.cp.ok{background:#e8f7ee;border-color:#bfe6cd}
+ul{padding-left:20px;margin:0}li{margin-bottom:6px}
+.poster{background:#fff;border:2px solid var(--ink);border-radius:20px;padding:24px 20px;text-align:center}
+.ph{font-size:clamp(22px,6vw,32px);font-weight:800;line-height:1.15;margin-bottom:14px}
+.qr{width:min(260px,70%);margin:0 auto}.ps{margin-top:14px;font-weight:600}.pc{margin-top:6px;color:var(--mut);font-size:14px;overflow-wrap:anywhere}
+.back{display:inline-flex;align-items:center;min-height:44px;margin-top:28px;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--ink);text-decoration:none;font-weight:600}
+a:focus-visible,button:focus-visible{outline:3px solid #9bb8ff;outline-offset:2px}
+@media print{body{background:#fff}.kick,h1,.lead,.back,.pr,.blk:not(:has(.poster)){display:none!important}}
+</style></head><body><main class="wrap">
+<div class="kick">Технический отчёт</div>
+<h1>Состояние сайта HR-Di на 26.11</h1>
+<p class="lead">Короткий отчёт о том, что мы проверили сами: открытием страниц и чтением кода сайта. Только факты, без оценок. Если что-то не совпадает с тем, что видите вы, напишите в рабочий чат.</p>
+<section class="blk"><h2>Сайт и страницы</h2><ul><li>Главная страница https://murzzsite.github.io/shuplecova-hr/ открывается.</li><li>В карте сайта (sitemap.xml) 13 адресов: главная, 7 страниц под запросы (менеджеры по продажам, РОП, IT-специалисты, бухгалтеры, маркетологи и SMM/PR, помощник руководителя, внешний HR-отдел), презентация, политика, согласие, блог и статья. Все 13 отвечают, проверено 26.11.</li><li>Файл robots.txt на месте и указывает на карту сайта.</li></ul></section><section class="blk"><h2>Форма заявки</h2><ul><li>Форма на главной собирает имя, телефон или контакт, вакансию, комментарий и отметку согласия на обработку данных. Без отметки согласия форма не отправляется.</li><li>Заявка уходит на сервис пересылки в Telegram. Сервис отвечает на запрос браузера, то есть доступен.</li><li>Тестовую заявку мы не отправляли, чтобы не создавать вам лишнее сообщение. Самая быстрая проверка: отправьте одну заявку сами (имя, телефон, отметка согласия). Сообщение должно прийти вам в Telegram от бота уведомлений.</li></ul><p class="note">Если сообщение не пришло, напишите в рабочий чат, посмотрим сразу.</p></section><section class="blk"><h2>Счётчик Яндекс Метрики</h2><ul><li>Счётчик 113805938 подключён в коде сайта.</li><li>Цель «Заявка» (идентификатор lead_submit) срабатывает при успешной отправке формы.</li><li>Важная деталь: Метрика включается только у тех посетителей, кто нажал «Принять» в плашке про cookie. Так сделано по закону. Поэтому цифры визитов и целей в Метрике показывают только часть реальных посещений, а не все.</li></ul></section><section class="blk"><h2>Юридический минимум</h2><ul><li>Есть страницы «Политика конфиденциальности» и «Согласие на обработку персональных данных», обе открываются.</li><li>Есть плашка cookie с выбором «Принять» и «Только необходимые».</li><li>В политике указаны ваши реквизиты оператора, которые вы передали 23.10. Сам паспорт и банковские данные на сайт не попадали.</li></ul></section><section class="blk"><h2>Поиск и блог</h2><ul><li>У каждой из 7 страниц свой заголовок, описание и вопросы-ответы.</li><li>В блоге опубликована статья «Сколько стоит подбор персонала», она открывается.</li><li>Видит ли поисковик эти страницы и по каким запросам показывает сайт, из кода проверить нельзя. Это показывают Яндекс Вебмастер и Метрика после того, как сайт добавлен в Вебмастер владельцем.</li></ul><p class="note">Мы не называем сроки появления сайта в поиске и не обещаем число заявок: поисковый трафик на новом сайте накапливается постепенно.</p></section>
+<a class="back" href="https://murzzsite.github.io/client-pages/p/4vr9f9wbw9/">Вернуться на страницу проекта</a>
+</main>
+<script>document.addEventListener('click',function(e){var b=e.target.closest('.cp');if(!b)return;var t=b.getAttribute('data-t');function ok(){b.textContent='Скопировано';b.classList.add('ok');setTimeout(function(){b.textContent='Копировать';b.classList.remove('ok')},1800)}try{navigator.clipboard.writeText(t).then(ok,function(){})}catch(x){}});</script>
+</body></html>
