@@ -69,7 +69,9 @@ textarea{width:100%;min-height:190px;resize:vertical;border:1.5px solid var(--li
   <section class="card" id="bad" hidden>
     <h3>Расскажите, что не так</h3>
     <p>Нам важно это исправить. Напишите в рабочий чат своими словами, мы разберёмся.</p>
-    <a class="btn" id="badBtn" href="#" target="_blank" rel="noopener">Написать в рабочий чат</a>
+    <textarea id="badText" maxlength="1000" aria-label="Что не так (по желанию)" placeholder="Что не так? Можно коротко, по желанию" style="min-height:110px;margin-bottom:10px"></textarea>
+    <button class="btn" id="badSend" type="button">Отправить нам</button>
+    <a class="btn ghost" id="badBtn" href="#" target="_blank" rel="noopener">Или написать в рабочий чат</a>
   </section>
 
   <div id="flow" hidden>
@@ -96,17 +98,19 @@ textarea{width:100%;min-height:190px;resize:vertical;border:1.5px solid var(--li
       <p class="small">Можно поправить прямо в поле.</p>
       <textarea id="text" aria-label="Текст отзыва"></textarea>
       <button class="btn ghost" id="again" type="button" style="margin-top:0">Другая формулировка</button>
-      <button class="btn" id="copy" type="button">Скопировать</button>
+      <button class="btn" id="send" type="button">Отправить нам</button>
+      <button class="btn ghost" id="copy" type="button">Скопировать</button>
       <a class="btn ghost" id="share" href="#" target="_blank" rel="noopener">Отправить в чат</a>
-      <p class="hint">Вставьте этот текст в наш рабочий чат с кодовой фразой <q>отзыв</q>.</p>
+      <p class="hint">Кнопка «Отправить нам» передаёт отзыв сразу. Или вставьте скопированный текст в рабочий чат с кодовой фразой <q>отзыв</q>.</p>
     </div>
 
     <div class="sep"></div>
     <h2 style="margin-bottom:10px">Где ещё оставить</h2>
     <div id="where"></div>
-    <p class="small" style="margin-top:14px">Страница ничего не отправляет на сервер и не сохраняет ваши ответы.</p>
+    <p class="small" style="margin-top:14px">Отправляется только то, что вы нажали: оценка, текст, имя из вашей ссылки и ваш выбор про публикацию. Больше ничего не собираем.</p>
   </section>
 </main>
+<input id="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -135,6 +139,10 @@ textarea{width:100%;min-height:190px;resize:vertical;border:1.5px solid var(--li
     {id:'na', label:'Пока не оценить'}
   ];
 
+  var API = 'https://lead-relay.leestygpt.workers.dev/review';
+  var isTest = q.get('t')==='1';
+  var rid = (function(){ var a=new Uint8Array(10); try{ crypto.getRandomValues(a); }catch(e){ for(var i=0;i<10;i++) a[i]=Math.floor(Math.random()*256); } return Array.prototype.map.call(a,function(x){return ('0'+x.toString(16)).slice(-2);}).join(''); })();
+  var sentKey = '';
   var st = {rating:0, chips:[], change:'', consent:'', seed:0, dirty:false};
   var $ = function(id){return document.getElementById(id);};
 
@@ -265,7 +273,20 @@ textarea{width:100%;min-height:190px;resize:vertical;border:1.5px solid var(--li
     }
   }
 
-  $('text').addEventListener('input', function(){ st.dirty=true; $('share').href=chatLink(payload()); });
+  function submit(btn, text, consent, label){
+    var key = st.rating+'|'+text+'|'+consent;
+    if(key===sentKey){ toast('Уже отправлено, спасибо'); return; }
+    btn.disabled=true; var old=btn.textContent; btn.textContent='Отправляем...';
+    var body = {rid:rid, rating:st.rating, text:text, name:name, code:code, chips:st.chips, change:st.change, consent:consent, _gotcha:$('hp').value};
+    if(isTest) body.test=true;
+    fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(){ sentKey=key; btn.disabled=false; btn.textContent=label||'Отправлено, спасибо!'; toast('Отправлено, спасибо!'); })
+      .catch(function(){ btn.disabled=false; btn.textContent=old; toast('Не получилось отправить. Нажмите ещё раз или скопируйте текст'); });
+  }
+  $('send').onclick=function(){ submit($('send'), $('text').value.trim(), st.consent, 'Отправлено, спасибо!'); };
+  $('badSend').onclick=function(){ submit($('badSend'), $('badText').value.trim(), 'no', 'Отправлено, спасибо!'); };
+  $('text').addEventListener('input', function(){ if($('send').textContent!=='Отправить нам') $('send').textContent='Отправить исправленный'; st.dirty=true; $('share').href=chatLink(payload()); });
   $('again').onclick=function(){ st.seed++; st.dirty=false; render(); toast('Готово, другая формулировка'); };
   $('share').addEventListener('click', function(){ $('share').href=chatLink(payload()); });
 
